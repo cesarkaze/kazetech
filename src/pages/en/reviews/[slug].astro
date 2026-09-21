@@ -1,0 +1,71 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import CommentsEn from '../../../components/CommentsEn.astro';
+import VerdictBox from '../../../components/VerdictBox.astro';
+
+export async function getStaticPaths() {
+  // 1. Filtramos para tomar únicamente los archivos de "en/"
+  const englishReviews = await getCollection('reviews', (review) => {
+    return review.id.startsWith('en/');
+  });
+  
+  return englishReviews.map((review) => {
+    // 2. Limpiamos el prefijo "en/" para generar la ruta correcta
+    const slugLimpio = review.id.replace('en/', '');
+    return {
+      params: { slug: slugLimpio },
+      props: { review },
+    };
+  });
+}
+
+const { review } = Astro.props;
+const { Content } = await render(review);
+---
+
+<Layout title={`${review.data.title} | KazeTech`}>
+  <main class="w-full max-w-4xl mx-auto px-6 py-12">
+    
+    <a href="/en/" class="text-xs font-bold uppercase tracking-wider text-sky-400 hover:text-sky-300 transition-colors inline-flex items-center gap-1 mb-8">
+      ← Back to Home
+    </a>
+
+    <header class="mb-8">
+      <span class="text-xs font-bold uppercase tracking-wider text-sky-400 bg-sky-950/50 px-2.5 py-1 rounded-md border border-sky-800/30">
+        {review.data.category}
+      </span>
+      <h1 class="text-3xl md:text-4xl font-black text-white tracking-tight mt-4">
+        {review.data.title}
+      </h1>
+      <p class="text-neutral-400 text-sm md:text-base mt-2 leading-relaxed">
+        {review.data.description}
+      </p>
+      
+      <div class="flex items-center gap-4 mt-6 text-xs text-neutral-400 border-t border-neutral-800 pt-4">
+        <span>Published: {review.data.publishDate}</span>
+        <span>•</span>
+        <span class="text-amber-400 font-bold text-sm">★ {review.data.product.rating} / 5</span>
+      </div>
+    </header>
+
+    <!-- Imagen destacada única -->
+    {review.data.featuredImage && (
+      <div class="w-full h-72 md:h-96 bg-neutral-950 rounded-2xl overflow-hidden mb-8 border border-neutral-800/80 shadow-2xl">
+        <img src={review.data.featuredImage} alt={review.data.title} class="w-full h-full object-cover" />
+      </div>
+    )}
+
+    <!-- Caja de veredicto y compra con enlaces de afiliado -->
+    <VerdictBox product={review.data.product} lang="en" />
+
+    <!-- Contenido del artículo Markdown -->
+    <article class="prose prose-invert prose-sky max-w-none text-neutral-300 leading-relaxed space-y-6">
+      <Content />
+    </article>
+
+    <!-- Sección de comentarios en inglés -->
+    <CommentsEn />
+
+  </main>
+</Layout>

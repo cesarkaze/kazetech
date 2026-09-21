@@ -1,0 +1,80 @@
+---
+interface ProductItem {
+  name: string;
+  badge?: string;
+  rating: string;
+  highlight: string;
+  connection: string;
+  affiliateUrl: string;
+}
+
+interface Props {
+  products: ProductItem[];
+  lang?: 'es' | 'en';
+}
+
+const { products = [], lang = 'es' } = Astro.props;
+
+const dict = {
+  es: {
+    product: "Producto",
+    rating: "Valoración",
+    highlight: "Característica Principal",
+    connection: "Conectividad",
+    buy: "Ver Precio"
+  },
+  en: {
+    product: "Product",
+    rating: "Rating",
+    highlight: "Main Highlight",
+    connection: "Connectivity",
+    buy: "Check Price"
+  }
+} as const;
+
+const t = dict[lang];
+---
+
+<div class="overflow-x-auto rounded-xl border border-neutral-800 bg-neutral-900/50 shadow-2xl">
+  <table class="w-full text-left text-sm text-neutral-400">
+    <thead class="bg-neutral-950/80 text-xs uppercase text-neutral-300 border-b border-neutral-800">
+      <tr>
+        <th scope="col" class="px-6 py-4 font-bold">{t.product}</th>
+        <th scope="col" class="px-6 py-4 font-bold">{t.rating}</th>
+        <th scope="col" class="px-6 py-4 font-bold hidden md:table-cell">{t.highlight}</th>
+        <th scope="col" class="px-6 py-4 font-bold hidden sm:table-cell">{t.connection}</th>
+        <th scope="col" class="px-6 py-4 font-bold text-center">{t.buy}</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-neutral-800">
+      {products.map((item: ProductItem) => (
+        <tr class="hover:bg-neutral-800/50 transition-colors">
+          <td class="px-6 py-4">
+            <div class="font-bold text-white text-base">{item.name}</div>
+            {item.badge && (
+              <span class="inline-block mt-1 text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
+                {item.badge}
+              </span>
+            )}
+          </td>
+          <td class="px-6 py-4">
+            <div class="flex items-center gap-1 font-bold text-amber-400">
+              <span>★</span> {item.rating}
+            </div>
+          </td>
+          <td class="px-6 py-4 text-neutral-300 hidden md:table-cell">{item.highlight}</td>
+          <td class="px-6 py-4 hidden sm:table-cell">
+            <span class="bg-neutral-800 text-neutral-300 text-xs px-2.5 py-1 rounded-md border border-neutral-700">
+              {item.connection}
+            </span>
+          </td>
+          <td class="px-6 py-4 text-center">
+            <a href={item.affiliateUrl} target="_blank" rel="noopener noreferrer" class="inline-block bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors shadow-lg shadow-sky-900/20">
+              {t.buy}
+            </a>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

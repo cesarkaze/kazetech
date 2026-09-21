@@ -1,0 +1,87 @@
+---
+import '../styles/global.css'; 
+import Header from '../components/Header.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const { 
+  title, 
+  description = "Análisis técnico independiente, pruebas de rendimiento real y recomendaciones directas para periféricos y audio.", 
+  image = "/kt-logo.jpg" 
+} = Astro.props;
+
+// Detectar dinámicamente el idioma según la URL
+const pathname = Astro.url.pathname;
+const isEnglish = pathname.startsWith('/en/') || pathname === '/en';
+const currentLang = isEnglish ? 'en' : 'es';
+
+// Generar rutas canónicas y alternas para SEO internacional (hreflang)
+const canonicalUrl = Astro.url;
+const esUrl = isEnglish 
+  ? new URL(pathname.replace(/^\/en/, '') || '/', Astro.url) 
+  : Astro.url;
+const enUrl = isEnglish 
+  ? Astro.url 
+  : new URL((`/en${pathname.startsWith('/') ? pathname : '/' + pathname}`).replace('//', '/'), Astro.url);
+
+// Resolver imagen absoluta segura para Open Graph / Twitter
+const imageUrl = new URL(image, Astro.url);
+---
+
+<!doctype html>
+<html lang={currentLang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/jpeg" href="/kt-logo.jpg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Básico & Canónico -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- SEO Multi-idioma (Hreflang para Google) -->
+    <link rel="alternate" hreflang="es" href={esUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={esUrl} />
+
+    <!-- Open Graph (WhatsApp, Discord, Facebook) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:locale" content={isEnglish ? "en_US" : "es_ES"} />
+
+    <!-- Twitter Cards (X) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+  </head>
+  <body class="bg-neutral-950 text-neutral-300 antialiased selection:bg-sky-500/30 selection:text-sky-200 flex flex-col min-h-screen">
+    <Header />
+    
+    <div class="flex-grow">
+      <slot />
+    </div>
+ <script>
+      // Hace que todos los enlaces externos dentro de los artículos se abran en nueva pestaña
+      document.addEventListener('DOMContentLoaded', () => {
+        const articleLinks = document.querySelectorAll<HTMLAnchorElement>('article a');
+        articleLinks.forEach((link) => {
+          if (link.hostname && link.hostname !== window.location.hostname) {
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'nofollow sponsored noopener');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

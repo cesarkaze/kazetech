@@ -1,0 +1,62 @@
+backend:
+  name: github
+  repo: cesarkaze/kazetech
+  branch: main
+
+# Carpeta donde se guardan las imágenes subidas desde el panel
+media_folder: "public/images/reviews"
+public_folder: "/images/reviews"
+
+collections:
+  # Colección para Reseñas en Español
+  - name: "reviews_es"
+    label: "Reseñas (Español)"
+    folder: "src/content/reviews/es"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Descripción Corta", name: "description", widget: "string" }
+      - { label: "Categoría", name: "category", widget: "string", default: "IEM EARPHONES" }
+      - { label: "Fecha de Publicación", name: "publishDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Imagen Destacada", name: "featuredImage", widget: "image", required: false }
+      
+      # Objeto con los datos del producto (VerdictBox)
+      - label: "Datos del Producto"
+        name: "product"
+        widget: "object"
+        fields:
+          - { label: "Nombre del Producto", name: "name", widget: "string" }
+          - { label: "Badge / Etiqueta", name: "badge", widget: "string", default: "Top Ventas", required: false }
+          - { label: "Puntuación (Rating)", name: "rating", widget: "string", default: "4.8" }
+          - { label: "Enlace de Afiliado (Amazon)", name: "affiliateUrl", widget: "string", required: false }
+          - { label: "Puntos Fuertes (Pros)", name: "pros", widget: "list", required: false }
+          - { label: "A Considerar (Contras)", name: "cons", widget: "list", required: false }
+
+      - { label: "Cuerpo del Análisis", name: "body", widget: "markdown" }
+
+  # Colección para Reseñas en Inglés
+  - name: "reviews_en"
+    label: "Reviews (English)"
+    folder: "src/content/reviews/en"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Short Description", name: "description", widget: "string" }
+      - { label: "Category", name: "category", widget: "string", default: "IEM EARPHONES" }
+      - { label: "Publish Date", name: "publishDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Featured Image", name: "featuredImage", widget: "image", required: false }
+      
+      - label: "Product Specs & Verdict"
+        name: "product"
+        widget: "object"
+        fields:
+          - { label: "Product Name", name: "name", widget: "string" }
+          - { label: "Badge", name: "badge", widget: "string", default: "Best Pick", required: false }
+          - { label: "Rating", name: "rating", widget: "string", default: "4.8" }
+          - { label: "Amazon Affiliate URL", name: "affiliateUrl", widget: "string", required: false }
+          - { label: "Key Strengths (Pros)", name: "pros", widget: "list", required: false }
+          - { label: "Drawbacks (Cons)", name: "cons", widget: "list", required: false }
+
+      - { label: "Review Content", name: "body", widget: "markdown" }

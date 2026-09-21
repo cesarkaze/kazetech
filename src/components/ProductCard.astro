@@ -1,0 +1,99 @@
+---
+interface Props {
+  badge?: string;
+  title: string;
+  rating?: string;
+  image: string;
+  description: string;
+  pros: string[];
+  cons: string[];
+  affiliateUrl: string;
+  priceNote?: string;
+}
+
+const {
+  badge,
+  title,
+  rating = "4.7",
+  image,
+  description,
+  pros,
+  cons,
+  affiliateUrl,
+  priceNote = "Ver precio en Amazon"
+} = Astro.props;
+---
+
+<article class="relative my-10 overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900 shadow-xl transition-shadow hover:shadow-2xl hover:border-sky-800/50">
+  {badge && (
+    <span class="absolute top-0 right-0 rounded-bl-xl bg-sky-600 px-5 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
+      {badge}
+    </span>
+  )}
+
+  <div class="grid gap-6 p-7 sm:grid-cols-12">
+    <!-- Imagen del Producto (Con fondo más oscuro para que resalte) -->
+    <div class="flex items-center justify-center sm:col-span-4 bg-black/50 p-4 rounded-xl border border-neutral-800">
+      <img 
+        src={image} 
+        alt={title} 
+        loading="lazy" 
+        class="max-h-60 w-auto object-contain"
+      />
+    </div>
+
+    <!-- Información y CTA -->
+    <div class="flex flex-col justify-between sm:col-span-8">
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="flex items-center text-sm font-bold text-sky-500">
+            ★ {rating}
+          </span>
+        </div>
+        <h3 class="text-2xl font-extrabold text-white mb-2 tracking-tight">{title}</h3>
+        <p class="text-base text-neutral-400 mb-5 font-medium">{description}</p>
+
+        <!-- Pros y Contras en estilo Dark -->
+        <div class="grid gap-4 sm:grid-cols-2 mb-8">
+          <div class="rounded-xl bg-neutral-950 p-4 border border-emerald-900/50">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-3">Puntos Fuertes</h4>
+            <ul class="space-y-1.5">
+              {pros.map(pro => (
+                <li class="flex items-start text-xs text-emerald-100 font-medium">
+                  <span class="mr-1.5 font-bold text-emerald-500">✓</span> {pro}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="rounded-xl bg-neutral-950 p-4 border border-rose-900/50">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-rose-400 mb-3">A Mejorar</h4>
+            <ul class="space-y-1.5">
+              {cons.map(con => (
+                <li class="flex items-start text-xs text-rose-100 font-medium">
+                  <span class="mr-1.5 font-bold text-rose-500">✕</span> {con}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón de Afiliado (Azul Eléctrico) -->
+      <div class="pt-3 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-5">
+        <span class="text-xs text-neutral-600 font-medium">Enlace patrocinado de Amazon</span>
+        <a
+          href={affiliateUrl}
+          target="_blank"
+          rel="nofollow sponsored noopener noreferrer"
+          class="w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-sky-600 px-8 py-3.5 text-sm font-bold text-white shadow-sm transition-all hover:bg-sky-500 hover:scale-[1.03] active:scale-95"
+        >
+          {priceNote}
+          <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</article>
