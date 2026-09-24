@@ -3,52 +3,37 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import ComparisonTable from '../../components/ComparisonTable.astro';
 
-// 1. Obtenemos solo las reseñas en inglés
+// Obtenemos únicamente las reseñas en inglés
 const allReviews = await getCollection('reviews', (review) => {
   return review.id.startsWith('en/');
 });
 
-// 2. Filtros de categorías estilo consola de hardware
-const categorias = [
-  { nombre: "All", active: true },
-  { nombre: "Broadcast Mics", active: false },
-  { nombre: "IEM Earphones", active: false },
-  { nombre: "Interfaces & Audio", active: false }
-];
+// Filtramos las destacadas (featured: true); si no hay suficientes, tomamos las primeras disponibles
+const featuredItems = allReviews.filter((rev) => rev.data.featured);
+const topPicks = (featuredItems.length > 0 ? featuredItems : allReviews).slice(0, 3);
 
-// 3. Datos de la tabla comparativa en inglés
-const productosTabla = [
-  {
-    name: "HyperX QuadCast S",
-    badge: "Best Seller",
-    rating: "4.9",
-    highlight: "Internal RGB & Pop Filter",
-    connection: "USB-C",
-    affiliateUrl: "https://amazon.com"
-  },
-  {
-    name: "Rode PodMic USB",
-    badge: "Pro Choice",
-    rating: "4.8",
-    highlight: "Dynamic capsule for broadcasting",
-    connection: "USB / XLR",
-    affiliateUrl: "https://amazon.com"
-  },
-  {
-    name: "Fifine K669B",
-    badge: "Budget",
-    rating: "4.6",
-    highlight: "Great sound at a low cost",
-    connection: "USB-A",
-    affiliateUrl: "https://amazon.com"
-  }
+// Alimentamos la tabla de especificaciones automáticamente
+const productosTabla = topPicks.map((rev) => ({
+  name: rev.data.product.name,
+  badge: rev.data.product.badge || "Featured",
+  rating: rev.data.product.rating,
+  highlight: rev.data.description,
+  connection: rev.data.category,
+  affiliateUrl: rev.data.product.affiliateUrl
+}));
+
+const categories = [
+  { name: "All", active: true },
+  { name: "Broadcast Mics", active: false },
+  { name: "IEM Earphones", active: false },
+  { name: "Interfaces & Audio", active: false }
 ];
 ---
 
-<Layout title="KazeTech | Hardware & Audio/Streaming Guides">
+<Layout title="KazeTech | Audio & Hardware Benchmarks">
   <main class="w-full px-6 md:px-12 2xl:px-20 py-12">
     
-    <!-- Hero Section: Tipografía Industrial y Gradiente Metálico -->
+    <!-- Hero Section -->
     <header class="mb-14 border-b border-neutral-800/80 pb-12">
       <div class="inline-flex items-center gap-2 rounded-md border border-neutral-800 bg-neutral-900/90 px-3 py-1 text-xs font-semibold text-neutral-300 mb-5 shadow-sm">
         <span class="h-2 w-2 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8]"></span>
@@ -66,21 +51,21 @@ const productosTabla = [
         Acoustic benchmarks, real latency tests, and technical breakdowns to build your competitive gaming or streaming setup without overpaying.
       </p>
 
-      <!-- Selector de Categorías: Filtros estilo Hardware Console -->
+      <!-- Category Filter -->
       <div class="flex flex-wrap gap-2.5 mt-8">
-        {categorias.map(cat => (
+        {categories.map(cat => (
           <button class={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200 border ${
             cat.active 
               ? "bg-sky-950/40 border-sky-500 text-sky-400 shadow-[0_0_15px_rgba(14,165,233,0.15)]" 
               : "bg-neutral-900/60 border-neutral-800 text-neutral-400 hover:border-neutral-700 hover:text-white"
           }`}>
-            {cat.nombre}
+            {cat.name}
           </button>
         ))}
       </div>
     </header>
 
-    <!-- Top 3 Quick Picks -->
+    <!-- Top 3 Quick Staff Recommendations Dinámicos -->
     <section class="mb-16">
       <div class="flex items-center justify-between mb-6">
         <div>
@@ -90,101 +75,68 @@ const productosTabla = [
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
-        <!-- Tarjeta 1: Rode PodMic -->
-        <div class="rounded-2xl border border-sky-500/50 bg-gradient-to-b from-neutral-900/90 to-neutral-950 p-5 flex flex-col justify-between shadow-[0_0_30px_rgba(2,132,199,0.1)] relative group">
-          <div class="flex justify-between items-start mb-4">
-            <span class="px-2.5 py-1 rounded bg-sky-500/10 border border-sky-500/30 text-sky-400 text-[10px] font-extrabold uppercase tracking-wider">
-              Top Pick
-            </span>
-            <span class="text-xs font-bold text-sky-400">★ 4.8</span>
-          </div>
-          
-          <div class="h-44 w-full rounded-xl bg-black/60 border border-neutral-800/80 mb-5 p-4 flex items-center justify-center overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&q=80" alt="Rode PodMic" class="max-h-full object-contain transition-transform duration-500 group-hover:scale-110" />
-          </div>
+        {topPicks.map((rev) => {
+          const cleanSlug = rev.id.replace('en/', '');
+          return (
+            <div class="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-5 flex flex-col justify-between hover:border-sky-500/50 transition-all shadow-lg group">
+              <div>
+                <div class="flex justify-between items-start mb-4">
+                  <span class="px-2.5 py-1 rounded bg-sky-500/10 border border-sky-500/30 text-sky-400 text-[10px] font-extrabold uppercase tracking-wider">
+                    {rev.data.product.badge || "Staff Pick"}
+                  </span>
+                  <span class="text-xs font-bold text-sky-400">★ {rev.data.product.rating}</span>
+                </div>
+                
+                <div class="h-44 w-full rounded-xl bg-black/60 border border-neutral-800/80 mb-5 p-4 flex items-center justify-center overflow-hidden">
+                  {rev.data.featuredImage && (
+                    <img 
+                      src={rev.data.featuredImage} 
+                      alt={rev.data.product.name} 
+                      class="max-h-full object-contain transition-transform duration-500 group-hover:scale-110" 
+                    />
+                  )}
+                </div>
 
-          <div>
-            <h3 class="text-xl font-bold text-white group-hover:text-sky-400 transition-colors">Rode PodMic USB</h3>
-            <p class="text-xs text-neutral-400 mt-2 leading-relaxed">
-              Broadcast-grade dynamic capsule. Rejects background noise and room echo without an external interface.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-neutral-800/80 flex items-center justify-between">
-            <span class="text-xs font-semibold text-neutral-400">Pro Grade</span>
-            <a href="https://amazon.com" target="_blank" rel="nofollow sponsored noopener" class="inline-flex items-center gap-1 text-xs font-bold text-sky-400 hover:text-sky-300">
-              Check Amazon →
-            </a>
-          </div>
-        </div>
+                <h3 class="text-xl font-bold text-white group-hover:text-sky-400 transition-colors line-clamp-1">
+                  {rev.data.product.name}
+                </h3>
+                <p class="text-xs text-neutral-400 mt-2 leading-relaxed line-clamp-2">
+                  {rev.data.description}
+                </p>
+              </div>
 
-        <!-- Tarjeta 2: HyperX QuadCast S -->
-        <div class="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-5 flex flex-col justify-between hover:border-neutral-700 transition-all shadow-lg group">
-          <div class="flex justify-between items-start mb-4">
-            <span class="px-2.5 py-1 rounded bg-neutral-800 text-neutral-300 text-[10px] font-extrabold uppercase tracking-wider">
-              Best Value
-            </span>
-            <span class="text-xs font-bold text-sky-400">★ 4.9</span>
-          </div>
-
-          <div class="h-44 w-full rounded-xl bg-neutral-950/80 border border-neutral-800/50 mb-5 p-4 flex items-center justify-center overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1621259182978-fbf93132d53d?w=600&q=80" alt="HyperX QuadCast S" class="max-h-full object-contain transition-transform duration-500 group-hover:scale-110" />
-          </div>
-
-          <div>
-            <h3 class="text-xl font-bold text-white group-hover:text-sky-400 transition-colors">HyperX QuadCast S</h3>
-            <p class="text-xs text-neutral-400 mt-2 leading-relaxed">
-              All-in-one setup with anti-vibration mount and tap-to-mute. Perfect for streaming without extra gear.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-neutral-800/80 flex items-center justify-between">
-            <span class="text-xs font-semibold text-neutral-400">USB Microphone</span>
-            <a href="/en/reviews/hyperx-quadcast-s" class="inline-flex items-center gap-1 text-xs font-bold text-sky-400 hover:text-sky-300">
-              Read review →
-            </a>
-          </div>
-        </div>
-
-        <!-- Tarjeta 3: Fifine K669B -->
-        <div class="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-5 flex flex-col justify-between hover:border-neutral-700 transition-all shadow-lg group">
-          <div class="flex justify-between items-start mb-4">
-            <span class="px-2.5 py-1 rounded bg-neutral-800 text-neutral-300 text-[10px] font-extrabold uppercase tracking-wider">
-              Budget Pick
-            </span>
-            <span class="text-xs font-bold text-sky-400">★ 4.6</span>
-          </div>
-
-          <div class="h-44 w-full rounded-xl bg-neutral-950/80 border border-neutral-800/50 mb-5 p-4 flex items-center justify-center overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&q=80" alt="Fifine K669B" class="max-h-full object-contain transition-transform duration-500 group-hover:scale-110" />
-          </div>
-
-          <div>
-            <h3 class="text-xl font-bold text-white group-hover:text-sky-400 transition-colors">Fifine K669B</h3>
-            <p class="text-xs text-neutral-400 mt-2 leading-relaxed">
-              Best price-to-performance ratio for beginners. Rugged metal build and crystal-clear audio.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-neutral-800/80 flex items-center justify-between">
-            <span class="text-xs font-semibold text-neutral-400">Affordable</span>
-            <a href="https://amazon.com" target="_blank" rel="nofollow sponsored noopener" class="inline-flex items-center gap-1 text-xs font-bold text-sky-400 hover:text-sky-300">
-              Check Amazon →
-            </a>
-          </div>
-        </div>
-
+              <div class="mt-6 pt-4 border-t border-neutral-800/80 flex items-center justify-between">
+                <a 
+                  href={`/en/reviews/${cleanSlug}`} 
+                  class="text-xs font-semibold text-neutral-400 hover:text-white transition-colors"
+                >
+                  Read review →
+                </a>
+                <a 
+                  href={rev.data.product.affiliateUrl} 
+                  target="_blank" 
+                  rel="nofollow sponsored noopener" 
+                  class="inline-flex items-center gap-1 text-xs font-bold text-sky-400 hover:text-sky-300"
+                >
+                  Check on Amazon →
+                </a>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
     
-    <!-- Tabla Comparativa con margen de scroll corregido y lang="en" -->
-    <section id="comparativa" class="mb-16 scroll-mt-28">
+    <!-- Dynamic Specification Table -->
+    <section id="comparative" class="mb-16 scroll-mt-28">
       <div class="mb-6">
-        <span class="text-xs font-bold uppercase tracking-wider text-sky-500">Quick Benchmark</span>
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-500">Quick Benchmark</span>
         <h2 class="text-2xl font-black text-white tracking-tight">Specification Comparison Table</h2>
       </div>
       <ComparisonTable products={productosTabla} lang="en" />
     </section>
 
-    <!-- Feed Dinámico de Reseñas en Inglés -->
+    <!-- Dynamic English Reviews Feed -->
     <section id="reviews" class="mb-16 scroll-mt-28">
       <div class="mb-6">
         <span class="text-xs font-bold uppercase tracking-wider text-sky-500">Laboratory</span>
