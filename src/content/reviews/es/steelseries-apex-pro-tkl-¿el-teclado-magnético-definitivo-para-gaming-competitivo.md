@@ -1,7 +1,7 @@
 ---
 title: 'SteelSeries Apex Pro TKL: ¿El teclado magnético definitivo para gaming competitivo?'
 description: Apex Pro TKL con switches magnéticos OmniPoint 3.0 y Rapid Trigger y su respuesta de 0.1 mm realmente marca la diferencia en shooters tácticos.
-category: Teclados Gaming Magneticos
+category: Teclados Magneticos
 publishDate: 2026-09-24
 featuredImage: /images/reviews/pasted-image-1790282880389.png
 featured: true
