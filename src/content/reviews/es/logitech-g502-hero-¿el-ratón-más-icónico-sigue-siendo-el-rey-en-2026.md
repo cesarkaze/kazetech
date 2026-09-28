@@ -4,7 +4,7 @@ description: Analizamos a fondo el legendario G502 HERO. Sensor de 25K, sistema 
 category: Mouse Gaming
 publishDate: 2026-09-28
 featuredImage: /images/reviews/61mpMH5TzkL._AC_SL1500_.jpg
-featured: false
+featured: true
 product:
   name: Logitech G502 HERO
   badge: Más Popular
