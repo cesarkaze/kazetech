@@ -6,7 +6,7 @@ publishDate: 2026-09-24
 featuredImage: /images/reviews/pasted-image-1790282880389.png
 featured: true
 product:
-  name: SteelSeries Apex Pro TKL Gen 3 OmniPoint 3.0 Interruptores hipermagnéticos
+  name: SteelSeries Apex Pro TKL Gen 3
   badge: Top Ventas
   rating: '4.7'
   affiliateUrl: https://amzn.to/4hcQ2cD
