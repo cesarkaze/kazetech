@@ -19,8 +19,8 @@ product:
     - El cable trenzado es un poco rígido frente a alternativas modernas.
 ---
 
-El \*\*Logitech G502 HERO\*\* es probablemente el ratón gaming más vendido y reconocible del mercado. Aunque la tendencia actual apunta a ratones ultra-ligeros, este periférico se mantiene como el favorito indiscutible para quienes buscan versatilidad, botones extra y una ergonomía insuperable para manos medianas y grandes.
+El **Logitech G502 HERO** es probablemente el ratón gaming más vendido y reconocible del mercado. Aunque la tendencia actual apunta a ratones ultra-ligeros, este periférico se mantiene como el favorito indiscutible para quienes buscan versatilidad, botones extra y una **ergonomía insuperable** para manos medianas y grandes.
 
-En nuestro laboratorio, el sensor óptico HERO de 25.600 DPI demostró ser impecable: no tiene aceleración de hardware, suavizado ni filtros, lo que garantiza que la mira en juegos como Counter-Strike 2 o Valorant vaya exactamente donde tu mano dicta. 
+En muestras de sus laboratorio, el **sensor óptico HERO de 25.600 DPI** demostró ser impecable: no tiene aceleración de hardware, suavizado ni filtros, lo que garantiza que la mira en juegos como **Counter-Strike 2** o **Valorant** vaya exactamente donde tu mano dicta. 
 
-Además, si trabajas en edición de video, diseño, o juegas MMOs, sus 11 botones programables y la rueda de scroll infinito te cambiarán la vida. Es un verdadero tanque de batalla que justifica cada centavo de su precio.
+Además, si trabajas en **edición de video**, **diseño**, o **juegas MMOs**, sus 11 botones programables y la rueda de scroll infinito te cambiarán la vida. Es un verdadero tanque de batalla que justifica cada centavo de su precio.
