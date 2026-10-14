@@ -18,26 +18,28 @@ product:
     - 'Modo de protección: una característica exclusiva de SteelSeries - protege tus pulsaciones de teclas reduciendo la sensibilidad de las teclas circundantes cuando se presiona la tecla deseada, evitando entradas accidentales'
     - ANTALLA INTELIGENTE OLED — Tu centro de comando digital para todos tus ajustes sin salir del juego
   cons:
-    - 'Pulsaciones fantasma (Key Chatter) al extremo: Aunque la marca promociona que puedes ajustar la activación a 0.1 mm o 0.2 mm, en la práctica real es casi imposible usarlo así. Al ser un switch magnético tan sensible, el más mínimo golpe en el escritorio, una vibración o simplemente reposar el dedo sin querer dispara la tecla o genera pulsaciones dobles fantasma. La mayoría de jugadores tienen que subirlo a 0.5 mm o más para que sea estable.'
-    - 'Acústica y tacto lejos del mundo custom: Si vienes de teclados mecánicos lubricados o con montaje tipo gasket (como Keychron o marcas personalizadas), este teclado suena notablemente más "hueco" y ruidoso. Aunque la placa superior es de aluminio, la base inferior es de plástico y los estabilizadores de teclas grandes (como la barra espaciadora) tienen algo de tambaleo (wobble).'
-    - 'La pantalla OLED puede sufrir burn-in: Es una pantalla monocromática muy llamativa al principio, pero si dejas un logo o imagen fija encendida a brillo máximo durante meses, el panel tiende a degradarse y marcarse permanentemente con el tiempo.'
-    - 'No todos los switches son magnéticos (en versiones previas a la Gen 3): Es un detalle que muchas marcas esconden con astucia: en los modelos anteriores de esta serie, los switches OmniPoint ajustables solo estaban en la zona alfanumérica principal, mientras que las flechas o teclas de función eran mecánicas estándar.'
+    - 'Sensibilidad extrema e imprecisión: En 0.1 mm/0.2 mm es hiper-sensible; cualquier vibración o apoyar apenas el dedo provoca pulsaciones fantasma o dobles entradas (obliga a subirlo a 0.5 Sensibilidad extrema e imprecisión: En 0.1 mm/0.2 mm es hiper-sensible; cualquier vibración o apoyar apenas el dedo provoca pulsaciones fantasma o dobles entradas (obliga a subirlo a 0.5 mm o más).mm o más).'
+    - 'Calidad de sonido y tacto inferior: Suena más "hueco" y ruidoso que un teclado mecánico custom, tiene base de plástico y los estabilizadores (como la barra espaciadora) tienen tambaleo (wobble).'
+    - 'Riesgo de burn-in en la pantalla OLED: La imagen o logo se puede quedar marcada permanentemente si permanece a brillo máximo por meses.'
+    - 'No todos los switches eran magnéticos (en Gen 1/2): En modelos anteriores a la Gen 3, las teclas de función y flechas no usaban switches OmniPoint, sino mecánicos estándar.'
 ---
 
-El \*\*SteelSeries Apex Pro TKL\*\* se ha consolidado como uno de los teclados más codiciados por jugadores competitivos y creadores de contenido. A diferencia de los teclados mecánicos tradicionales con contactos metálicos, este modelo implementa tecnología de efecto Hall con switches magnéticos \*\*OmniPoint 3.0\*\*, permitiendo un control milimétrico sobre cada pulsación.
+El **SteelSeries Apex Pro TKL** se ha consolidado como uno de los teclados más codiciados por jugadores competitivos y creadores de contenido. A diferencia de los teclados mecánicos tradicionales con contactos metálicos, este modelo implementa tecnología de efecto Hall con switches magnéticos **OmniPoint 3.0**, permitiendo un control milimétrico sobre cada pulsación.
 
 ### Ventaja Competitiva: Rapid Trigger y Actuación Regulable
 
 El núcleo de este teclado reside en la capacidad de personalizar el punto de activación de cada tecla de forma individual:
 
-\*   \*\*Rango de 0.1 mm a 4.0 mm:\*\* Puedes configurar teclas críticas de movimiento para que registren con el más mínimo roce, mientras que habilidades accidentales o granadas requieren una pulsación profunda.
+\*   **Rango de 0.1 mm a 4.0 mm:** Puedes configurar teclas críticas de movimiento para que registren con el más mínimo roce, mientras que habilidades accidentales o granadas requieren una pulsación profunda.
 
-\*   \*\*Rapid Trigger Dinámico:\*\* La tecla se desactiva en el instante exacto en que tu dedo inicia el movimiento ascendente, eliminando el recorrido de reinicio físico. Esto traduce en \*counter-strafing\* y frenadas perfectas en shooters en primera persona sin la fricción habitual de los resortes convencionales.
+\*   **Rapid Trigger Dinámico:** La tecla se desactiva en el instante exacto en que tu dedo inicia el movimiento ascendente, eliminando el recorrido de reinicio físico. Esto traduce en **counter-strafing** y frenadas perfectas en shooters en primera persona sin la fricción habitual de los resortes convencionales.
 
 ### Construcción, Acústica y Pantalla OLED
 
-El chasis de aluminio serie 5000 otorga una rigidez total sobre el escritorio, evitando cualquier tipo de flexión durante sesiones intensas. Además, la pantalla inteligente OLED en la esquina superior derecha permite alternar perfiles de actuación, ajustar la iluminación y ver estadísticas sobre la marcha sin necesidad de salir del juego ni abrir el software en segundo plano.
+El chasis de aluminio serie 5000 otorga una rigidez total sobre el escritorio, evitando cualquier tipo de flexión durante sesiones intensas. Además, la **pantalla inteligente OLED** en la esquina superior derecha permite alternar perfiles de actuación, ajustar la iluminación y ver estadísticas sobre la marcha sin necesidad de salir del juego ni abrir el software en segundo plano.
 
-### Veredicto de KazeTech
+### VEREDICTO KazeTech: No es solo un teclado, es una ventaja táctica.
 
-Si buscas exprimir cada milisegundo de ventaja en partidas igualadas y quieres la máxima durabilidad sin desgaste de contactos mecánicos, el Apex Pro TKL justifica cada centavo. Representa el salto evolutivo real en periféricos de alto rendimiento.
+El **SteelSeries Apex Pro TKL** redefine lo que significa la ventaja competitiva en el _gaming_ de alto rendimiento. Aunque sus ajustes de **sensibilidad extrema en 0.1 mm** requieren cierta moderación para evitar pulsaciones accidentales y su acústica no rivaliza con teclados _custom_, la tecnología de sus switches magnéticos **OmniPoint 3.0** con **Rapid Trigger** es simplemente imbatible. La velocidad de respuesta, el frenado instantáneo en shooters tácticos y la versatilidad de la pantalla OLED lo colocan en la cima del mercado. Si buscas recortar cada milisegundo en partidas clasificatorias con el teclado más rápido del mundo, el **Apex Pro TKL** es una inversión de nivel profesional que justifica totalmente su precio. 
+
+##### **_Entonces, ¿Qué esperas para probarlo?_**
