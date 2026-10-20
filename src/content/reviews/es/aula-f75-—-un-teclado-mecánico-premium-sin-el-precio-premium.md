@@ -4,7 +4,7 @@ description: Un teclado mecánico compacto que combina una experiencia de escrit
 category: Teclados mecánicos inalámbricos
 publishDate: 2026-10-19
 featuredImage: /images/reviews/AULA F75.avif
-featured: false
+featured: true
 product:
   name: The AULA F75
   badge: Top Ventas
